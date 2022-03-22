@@ -1,0 +1,393 @@
+/* 
+ *author:crazybox521
+ *time:2021/11/1
+ *
+ *
+ *
+*/
+/* reset */
+html,
+body,
+p,
+ol,
+ul,
+li,
+dl,
+dt,
+dd,
+blockquote,
+figure,
+fieldset,
+legend,
+textarea,
+pre,
+iframe,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: 400
+}
+
+ul {
+    list-style: none
+}
+
+button,
+input,
+select,
+textarea {
+    margin: 0
+}
+
+html {
+    box-sizing: border-box
+}
+
+* {
+    box-sizing: inherit
+}
+
+*:before,
+*:after {
+    box-sizing: inherit
+}
+
+img,
+embed,
+object,
+audio,
+video {
+    height: auto;
+    max-width: 100%
+}
+
+iframe {
+    border: 0
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+td,
+th {
+    padding: 0;
+    text-align: left
+}
+
+/* global */
+:root {
+    font-size: 14px;
+}
+
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+}
+
+@media screen and (max-width:768px) {}
+
+.hidden {
+    display: none;
+}
+
+/* 全局图片填满样式 */
+.img {
+    width: 100%;
+}
+
+.img-h {
+    height: 100%;
+}
+
+.img-80 {
+    height: 80%;
+}
+
+.img-radius-4 {
+    border-radius: 4px;
+}
+
+.img-radius-8 {
+    border-radius: 8px;
+}
+
+.img-border {
+    box-sizing: border-box;
+    border: 1px solid #dddddd;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+/* 单行文字超出隐藏 */
+.text-hidden {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* 全局字体加粗 */
+.font-bold {
+    font-weight: bold;
+}
+
+/* 全局字体大小 */
+.font-12 {
+    font-size: 12px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+
+.font-16 {
+    font-size: 16px;
+}
+
+.font-18 {
+    font-size: 18px;
+}
+
+.font-20 {
+    font-size: 20px;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+
+/* 全局margin间距 */
+.mleft-6 {
+    margin-left: 6px;
+}
+
+.mleft-10 {
+    margin-left: 10px;
+}
+
+.mleft-12 {
+    margin-left: 12px;
+}
+
+.mleft-20 {
+    margin-left: 20px;
+}
+
+.mleft-30 {
+    margin-left: 30px;
+}
+
+.mleft-40 {
+    margin-left: 40px;
+}
+
+.mleft-200 {
+    margin-left: 200px;
+}
+
+.mleft-300 {
+    margin-left: 300px;
+}
+
+.mright-5 {
+    margin-right: 5px;
+}
+
+.mright-10 {
+    margin-right: 10px;
+}
+
+.mright-20 {
+    margin-right: 20px;
+}
+
+.mright-30 {
+    margin-right: 30px;
+}
+
+.mtop-10 {
+    margin-top: 10px;
+}
+
+.mtop-20 {
+    margin-top: 20px;
+}
+
+.mtop-30 {
+    margin-top: 30px;
+}
+
+.mtop-50 {
+    margin-top: 50px;
+}
+
+.mtop-60 {
+    margin-top: 60px;
+}
+
+.mbottom-10 {
+    margin-bottom: 10px;
+}
+
+.mbottom-20 {
+    margin-bottom: 2px;
+}
+
+/* 全局宽度 */
+.w-60 {
+    width: 60px;
+}
+
+.w-100 {
+    width: 100px;
+}
+
+.w-150 {
+    width: 150px;
+}
+
+.w-200 {
+    width: 200px;
+}
+
+.w-300 {
+    width: 300px;
+}
+
+.w-500 {
+    width: 500px;
+}
+
+.h-100 {
+    height: 100px;
+}
+
+.h-80 {
+    height: 80px;
+}
+
+.h-60 {
+    height: 60px;
+}
+
+/* 全局鼠标样式 */
+.pointer {
+    cursor: pointer;
+}
+
+.default-cursor {
+    cursor: default;
+}
+
+
+
+/* 全局浮动样式 */
+.right {
+    float: right;
+}
+
+/* 清除边距塌陷和浮动 */
+.clearfix::after,
+.clearfix::before {
+    display: table;
+    content: "";
+    clear: both;
+}
+
+/* 全局滚动条宽度 */
+::-webkit-scrollbar {
+    /* 对垂直有效 */
+    width: 6px;
+    /* 水平宽度 */
+    height: 6px;
+}
+
+@media screen and (max-width:768px) {
+    ::-webkit-scrollbar {
+        width: 2px;
+        height: 1px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1px;
+        box-shadow: inset 0 0 1px #e0e0e0;
+        background-color: #e0e0e0;
+    }
+}
+
+/* 滚动条内滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    box-shadow: inset 0 0 3px #e0e0e0;
+    background-color: #e0e0e0;
+}
+
+
+/* 全局flex垂直居中加空隙分布两端  */
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flex_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 设置鼠标处于element表格上的状态 */
+.el-table {
+    cursor: default;
+}
+
+/* div制作的线条 */
+.div-line {
+    border-top: 1px solid #e0e0e0;
+}
+
+
+/* 部分二级路由页面头部导航 */
+.router-list {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    position: fixed;
+    left: 200px;
+    padding-left: 30px;
+    top: 60px;
+    z-index: 99;
+    background-color: #ffffff;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .router-list {
+        left: 0;
+        width: 100%;
+        overflow-x: scroll;
+        padding-left: 0;
+        text-align: center;
+        transition: all 0.5s linear;
+    }
+}

@@ -1,0 +1,183 @@
+<template>
+  <div class="artist-list mtop-60">
+		<!-- 手机端歌手菜单按钮 -->
+    <button @click="openTag" class="hidden btn-white">{{ showH5Info }}</button>
+		
+    <div class="tag-wrapper font-14" ref="tagRef">
+			<!-- 第一列 语种/地区 -->
+      <div class="radio-list">
+        <span class="w-60">语种：</span>
+        <el-radio-group v-model="queryInfo.area">
+          <el-radio  :label="ar.id" v-for="ar in artistData.area" :key="ar.id">
+					{{ ar.value }} 
+					</el-radio>
+        </el-radio-group>
+      </div>
+			<!-- 第二列 分类 -->
+      <div class="radio-list">
+        <span class="w-60">分类：</span>
+        <el-radio-group v-model="queryInfo.type">
+          <el-radio :label="tp.id" v-for="tp in artistData.type" :key="tp.id">
+					{{ tp.value }}
+					</el-radio>
+        </el-radio-group>
+      </div>
+			<!-- 第三列 筛选 -->
+      <div class="radio-list">
+        <span class="w-60">筛选：</span>
+        <el-radio-group v-model="queryInfo.initial">
+          <el-radio :label="it.id" v-for="it in artistData.initial" :key="it.id">
+					{{ it.value }} 
+					</el-radio>
+        </el-radio-group>
+      </div>
+    </div>
+		<!-- 图片展示 -->
+    <ImgList
+      @loadMore="load"
+      @clickImg="toArtistDetail"
+      :infinite="true"
+      :list="artistList"
+      :hasMore="hasMore"
+      type="artist"
+      :isLoading="isLoading"
+    >
+      <template v-slot="{ item }">
+        <div class="text-hidden">
+          {{ item.name }}
+        </div>
+      </template>
+    </ImgList>
+  </div>
+</template>
+
+<script>
+import artistData from '@/listData/artistData'
+import ImgList from '@/components/list/ImgList.vue'
+import { getArtistList } from '@/api/api_artist'
+export default {
+  components: {
+    ImgList
+  },
+  computed: {
+    showH5Info() {
+      return this.showTagH5 ? '关闭' : '查看所有歌手'
+    }
+  },
+  data() {
+    return {
+      queryInfo: {
+        //查询信息
+        limit: 30,
+        area: -1,
+        offset: 0,
+        type: -1,
+        initial: '-1'
+      },
+      hasMore: true, // 是否还有更多歌手未加载
+      artistData, // 列表项
+      artistList: [], // 歌手列表
+      isLoading: false, // 正在获取歌手列表
+      mode: 'first',
+      showTagH5: false
+    }
+  },
+  created() {
+    this.getArtistList()
+  },
+  watch: {
+    queryInfo: {
+      deep: true,
+      handler() {
+        this.getArtistList()
+      }
+    }
+  },
+  methods: {
+    async getArtistList() {
+      this.isLoading = true
+      /* 重置偏移量 */
+      if (this.mode == 'first') this.queryInfo.offset = 0
+      const res = await getArtistList(this.queryInfo)
+      if (res.code !== 200) return this.$message.error('获取失败')
+      if (this.mode == 'first') {
+        this.artistList = res.artists
+      } else {
+        this.artistList.push(...res.artists)
+      }
+      this.hasMore = res.more
+      if (this.mode === 'first') {
+        this.isLoading = false
+      } else {
+        setTimeout(() => {
+          this.isLoading = false
+        }, 2000)
+      }
+      this.mode = 'first'
+    },
+    /* loadMore事件的回调 */
+    load(num) {
+      /* 这里有点问题，会多次触发，需要节流*/
+      if (this.isLoading) return
+      if (!this.hasMore) return this.$message.error('已经到底了')
+      this.mode = 'more'
+      this.queryInfo.offset = num + 30
+    },
+    /* 移动端情况下打开标签列表 */
+    openTag() {
+      if (!this.showTagH5) this.$refs.tagRef.style.display = 'block'
+      else this.$refs.tagRef.style.display = 'none'
+      this.showTagH5 = !this.showTagH5
+    },
+    toArtistDetail(id) {
+      if (typeof id === 'number') this.$router.push('/artistdetail/' + id)
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+.radio-list {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 20px;
+  margin-top: 10px;
+  span {
+    height: 30px;
+    line-height: 30px;
+  }
+  .el-radio-group {
+    width: 80%;
+    .el-radio {
+      width: 60px;
+      height: 30px;
+      line-height: 30px;
+			margin-right: 10px;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .tag-wrapper {
+    display: none;
+  }
+  .hidden {
+    display: block;
+    margin-top: 70px;
+  }
+  .redio-list {
+    .el-radio-group {
+      width: 80%;
+      .el-radio {
+        margin-left: 10px;
+        width: 40px;
+        height: 30px;
+        line-height: 30px;
+      }
+    }
+  }
+}
+
+/deep/ .el-radio__label{
+	font-size:12px;
+}
+</style>
