@@ -21,9 +21,3 @@ export const likeMusic = (id, like = true) => get('/like?', { id, like, timestam
 /* 新歌速递 */
 //全部:0 华语:7 欧美:96 日本:8 韩国:16
 export const getTopMusic = (type) => get('/top/song', { type })
-
-/* login 私人FM */
-export const getPersonalFm = () => get('/personal_fm',{timestamp: Date.now()})
-
-/* login 私人FM垃圾桶 */
-export const fmTrash =(id)=>get('/fm_trash',{id})

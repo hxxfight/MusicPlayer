@@ -4,11 +4,9 @@
 
 **仅供个人学习练手！**
 
-[预览地址](http://8.130.100.213/#/personalrecom)
+[预览地址](http://119.29.185.236)
 
 功能展示于文末
-
-
 
 
 
@@ -84,18 +82,15 @@ npm run dev
 
 - [x] 我的收藏和我建立的歌单：用户收藏的专辑、MV、歌手及筛选功能
 
-- [x] 使用 Vuex 进行组件间通信，管理组件状态
+- [x] 使用 Vuex 进行组件间通信，管理组件公用状态
 
 - 优化
   - [x] el-skeleton实现骨架屏（skeleton），提高首屏加载时的用户体验
-  
-    移动端适配
-  
+  - [x] 对部分显示异常页面移动端适配
     - [x] 移动端轮播图不使用立体效果
-  
-  - [x] 路由懒加载及代码分块
-  
-  - [x] 未登录情况下的路由守卫
+    - [x] 移动端的菜单显示
+  - [x] 使用路由懒加载改善长时间白屏的问题
+  - [x] 使用路由守卫监管未登录状态
 
 
 
@@ -204,4 +199,13 @@ npm run dev
         </td>
     </tr>
 </table>
+
+
+## 参考
+
+https://github.com/Binaryify/NeteaseCloudMusicApi
+
+https://github.com/xiaozhu188/electron-vue-cloud-music
+
+https://github.com/crazybox521/vue-NetEasyMusic
 

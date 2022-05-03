@@ -1,26 +1,5 @@
 import get from '@/service/get'
 
-/* 视频分类 */
-export const getVideoAlltag = () => get('/video/group/list')
-
-/* 视频热门分类 */
-export const getVideoHotTag = () => get('/video/category/list')
-
-/* 全部视频列表 */
-export const getAllVideo = (offset) => get('/video/timeline/all', { offset })
-
-/* 根据标签获取视频列表 */
-export const getVideoByTag = (id, offset) => get('/video/group', { id, offset })
-
-/* 获取全部MV area limit offset order*/
-export const getAllMv = ({ area, limit, offset, order }) => get('/mv/all', { area, limit, offset, order })
-
-/* 获取最新MV */
-export const getNewMv = (area, limit) => get('/mv/first', { area, limit })
-
-/* 获取网易出品Mv */
-export const getNetEasyMv = (limit, offset) => get('/mv/exclusive/rcmd', { limit, offset })
-
 /* mv 排行 area, limit,offset */
 export const getTopMv = ({ area, limit, offset = 0 }) => get('/top/mv', { area, limit, offset })
 
